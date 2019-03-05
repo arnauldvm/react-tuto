@@ -10,6 +10,12 @@ function Square(props) {
   );
 }
 
+const coords = [
+  [1, 1], [1, 2], [1, 3],
+  [2, 1], [2, 2], [2, 3],
+  [3, 1], [3, 2], [3, 3],
+]
+
 class Board extends React.Component {
   renderSquare(i) {
     return (
@@ -65,6 +71,7 @@ class Game extends React.Component {
     this.setState({
       history: history.concat([{
         squares: squares,
+        play: {cellNum: i, isX: this.state.xIsNext},
       }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
@@ -85,7 +92,7 @@ class Game extends React.Component {
 
     const moves = history.map((step, move) => {
       const desc = move ?
-        'Go to move #' + move :
+        'Go to move #' + move + ' (' + (step.play.isX?'X':'O') + ' in cell ' + coords[step.play.cellNum] + ')':
         'Go to game start';
       return (
         <li key={move}>
