@@ -94,9 +94,10 @@ class Game extends React.Component {
       const desc = move ?
         'Go to move #' + move + ' (' + (step.play.isX?'X':'O') + ' in cell ' + coords[step.play.cellNum] + ')':
         'Go to game start';
+      const clazz = (this.state.stepNumber == move)?"current":""
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button class={clazz} onClick={() => this.jumpTo(move)}>{desc}</button>
         </li>
       );
     });
